@@ -1,4 +1,4 @@
-package tada.com.tadaproject
+package tada.com.tadaproject.activity
 
 import android.os.Bundle
 import android.support.design.widget.NavigationView
@@ -10,6 +10,7 @@ import android.view.Menu
 import android.view.MenuItem
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.app_bar_main.*
+import tada.com.tadaproject.R
 
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
 
