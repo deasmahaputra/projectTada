@@ -1,8 +1,14 @@
 package tada.com.tadaproject.service
 
+import io.reactivex.Observable
+import retrofit2.http.GET
+import tada.com.tadaproject.model.ArtResponse
+
 interface Api {
 
-//    @GET("/v1/forecast.json?key=a1f54d90387446a6bc582605181708&days=5")
-//    fun getMatch(@Query("q") q : String) : Observable<>
+    @GET("/api/nl/collection?key=DhC4gl3s&format=json&type=schilderij&f.normalized32Colors.hex=%20%23367614")
+    fun getArt() : Observable<ArtResponse>
+
+
 
 }

@@ -1,5 +1,6 @@
 package tada.com.tadaproject.activity
 
+import android.app.Fragment
 import android.os.Bundle
 import android.support.design.widget.NavigationView
 import android.support.design.widget.Snackbar
@@ -11,8 +12,11 @@ import android.view.MenuItem
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.app_bar_main.*
 import tada.com.tadaproject.R
+import tada.com.tadaproject.fragment.FragmentMainView
 
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
+
+    private var fragmentMain : FragmentMainView? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,6 +34,11 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         toggle.syncState()
 
         nav_view.setNavigationItemSelectedListener(this)
+
+        fragmentMain = Fragment.instantiate(this, FragmentMainView::class.java.getName()) as FragmentMainView
+        fragmentManager.beginTransaction().replace(R.id.flLista, fragmentMain).commit()
+
+
     }
 
     override fun onBackPressed() {
@@ -65,21 +74,10 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             R.id.nav_gallery -> {
 
             }
-            R.id.nav_slideshow -> {
-
-            }
-            R.id.nav_manage -> {
-
-            }
-            R.id.nav_share -> {
-
-            }
-            R.id.nav_send -> {
-
-            }
         }
 
         drawer_layout.closeDrawer(GravityCompat.START)
         return true
     }
+
 }

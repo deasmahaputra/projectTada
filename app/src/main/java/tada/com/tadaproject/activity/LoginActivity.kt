@@ -26,7 +26,13 @@ class LoginActivity : AppCompatActivity(){
         submitButton = findViewById<Button>(R.id.button)
 
         submitButton.setOnClickListener(View.OnClickListener {
-            startActivity(Intent(this, MainActivity::class.java))
+            if(!username.text.isEmpty() && !password.text.isEmpty()){
+                startActivity(Intent(this, MainActivity::class.java))
+            }else{
+                username.error = "Username can't be empty"
+                password.error = "Password can't be empty"
+            }
+
         })
 
         registerButton.setOnClickListener(View.OnClickListener {
