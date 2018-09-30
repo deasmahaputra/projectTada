@@ -1,10 +1,9 @@
 package tada.com.tadaproject.model
 
-import com.google.gson.annotations.SerializedName
-
 class ArtResponse {
 
-        @SerializedName("artObjects")
-        var art: MutableList<ItemArtResponse> = mutableListOf()
+        lateinit var artObjects : List<ItemArtResponse>
+//        @SerializedName("artObjects")
+//        var art: MutableList<ItemArtResponse> = mutableListOf()
 
 }
