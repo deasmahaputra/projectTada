@@ -31,6 +31,10 @@ class FragmentMainView : Fragment(){
     var somethingWrongFragment: SomethingWrongFragment? = null
     lateinit var dialog: Dialog
 
+    companion object {
+        var onClickArtName:String = "onClickArtName"
+    }
+
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.fragment_main, container, false)
@@ -83,7 +87,7 @@ class FragmentMainView : Fragment(){
                         {
                             dialog.dismiss()
                             fragmentManager.beginTransaction().replace(R.id.flLista, somethingWrongFragment).commit()
-                            Toast.makeText(activity.applicationContext, it.message, Toast.LENGTH_SHORT).show()
+                            //Toast.makeText(activity.applicationContext, it.message, Toast.LENGTH_SHORT).show()
                         })
     }
 
