@@ -7,7 +7,10 @@ import android.view.View
 import android.widget.Button
 import android.widget.CheckBox
 import android.widget.EditText
+import android.widget.Toast
+import io.realm.Realm
 import tada.com.tadaproject.R
+import tada.com.tadaproject.model.User
 
 class RegisterActivity : AppCompatActivity(){
 
@@ -15,10 +18,14 @@ class RegisterActivity : AppCompatActivity(){
     lateinit var password : EditText
     lateinit var submitButton : Button
     lateinit var checkBox: CheckBox
+    lateinit var realm: Realm
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_register)
+
+        Realm.init(this)
+        realm = Realm.getDefaultInstance()
 
         username = findViewById<EditText>(R.id.username_et)
         password = findViewById<EditText>(R.id.password_et)
@@ -30,7 +37,9 @@ class RegisterActivity : AppCompatActivity(){
             if(!username.text.isEmpty()){
                 if(!password.text.isEmpty()){
                     if(checkBox.isChecked){
+                        writeDB(username.text.toString(), password.text.toString())
                         startActivity(Intent(this, MainActivity::class.java))
+                        finish()
                     }else{
                         checkBox.error = "Term & Condition must be checklist"
                     }
@@ -41,7 +50,16 @@ class RegisterActivity : AppCompatActivity(){
                 username.error = "Username can't be empty"
             }
         })
+    }
 
+    fun writeDB(username : String, password : String){
+        realm.executeTransactionAsync({ bgRealm ->
+            val draft = bgRealm.createObject(User::class.java!!)
+            draft.username = username
+            draft.password = password
 
+        }, { }, { error ->
+            Toast.makeText(this, error.message, Toast.LENGTH_LONG).show()
+        })
     }
 }

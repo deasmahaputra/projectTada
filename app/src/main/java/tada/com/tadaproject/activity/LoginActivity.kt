@@ -51,8 +51,6 @@ class LoginActivity : AppCompatActivity(){
     }
 
     fun writeDB(username : String, password : String){
-//        realm.executeTransactionAsync(object : Realm.)
-
         realm.executeTransactionAsync({ bgRealm ->
             val draft = bgRealm.createObject(User::class.java!!)
             draft.username = username

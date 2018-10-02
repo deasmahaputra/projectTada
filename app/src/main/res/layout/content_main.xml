@@ -8,11 +8,9 @@
     tools:context=".activity.MainActivity"
     tools:showIn="@layout/app_bar_main">
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/list_of_art_rv"
+    <FrameLayout
+        android:id="@+id/flLista"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-    </android.support.v7.widget.RecyclerView>
+        android:layout_height="match_parent"></FrameLayout>
 
 </android.support.constraint.ConstraintLayout>

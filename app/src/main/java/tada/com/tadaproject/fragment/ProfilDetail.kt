@@ -5,16 +5,16 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
-import android.view.TextureView
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
-import android.widget.Toast
 import io.realm.Realm
 import tada.com.tadaproject.R
-import tada.com.tadaproject.activity.MainActivity
+import tada.com.tadaproject.activity.SplashScreenActivity
 import tada.com.tadaproject.model.User
+
+
 
 /**
  * Created by Deas on 10/2/18.
@@ -37,6 +37,13 @@ class ProfilDetail : Fragment(){
 
         showData()
 
+        logoutButton.setOnClickListener({
+            realm.executeTransaction { realm ->
+                realm.where(User::class.java).findAll().deleteAllFromRealm()
+            }
+            startActivity(Intent(activity, SplashScreenActivity::class.java))
+        })
+
         return view
     }
 
@@ -46,7 +53,6 @@ class ProfilDetail : Fragment(){
             if (guest.username.isNullOrEmpty()) {
                 Log.d("isi username", "gagal")
             } else {
-                Toast.makeText(activity, guest.username, Toast.LENGTH_SHORT).show()
                 usernameTextView!!.text = guest.username
             }
 

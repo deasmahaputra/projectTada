@@ -10,11 +10,9 @@ import android.support.annotation.RequiresApi
 import android.support.v7.app.AlertDialog
 import android.support.v7.widget.DividerItemDecoration
 import android.support.v7.widget.RecyclerView
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import retrofit2.Retrofit
@@ -79,25 +77,12 @@ class FragmentMainView : Fragment(){
                 .subscribe({
                     success ->
                     dialog.dismiss()
-                    Toast.makeText(activity.applicationContext, success.artObjects[0].title, Toast.LENGTH_SHORT).show()
-                    Log.d("test pok", success.artObjects[0].title)
                     listAdapter!!.getData(success.artObjects)
 
-                },
-                        {
-                            dialog.dismiss()
-                            fragmentManager.beginTransaction().replace(R.id.flLista, somethingWrongFragment).commit()
+                }, {
+                    dialog.dismiss()
+                    fragmentManager.beginTransaction().replace(R.id.flLista, somethingWrongFragment).commit()
                             //Toast.makeText(activity.applicationContext, it.message, Toast.LENGTH_SHORT).show()
-                        })
+                })
     }
-
-//    fun getData(city : String) {
-//        val retrofit: Retrofit = Retrofit.Builder()
-//                .baseUrl("https://api.apixu.com")
-//                .addConverterFactory(GsonConverterFactory.create())
-//                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-//                .build()
-//
-//        val apiMatch = retrofit.create(Api::class.java)
-//    }
 }

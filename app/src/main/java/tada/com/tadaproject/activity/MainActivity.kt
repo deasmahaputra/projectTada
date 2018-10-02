@@ -1,10 +1,8 @@
 package tada.com.tadaproject.activity
 
 import android.app.Fragment
-import android.content.Intent
 import android.os.Bundle
 import android.support.design.widget.NavigationView
-import android.support.design.widget.Snackbar
 import android.support.v4.view.GravityCompat
 import android.support.v7.app.ActionBarDrawerToggle
 import android.support.v7.app.AppCompatActivity
@@ -13,7 +11,6 @@ import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import android.widget.TextView
-import android.widget.Toast
 import io.realm.Realm
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.app_bar_main.*
@@ -81,13 +78,12 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     }
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
-        // Handle navigation view item clicks here.
         when (item.itemId) {
             R.id.home -> {
-                startActivity(Intent(this, SplashScreenActivity::class.java))
+                val fragment : Fragment? = FragmentMainView()
+                fragmentManager.beginTransaction().replace(R.id.flLista, fragment).commit()
             }
             R.id.profile -> {
-                Toast.makeText(this, "diklik", Toast.LENGTH_SHORT).show()
                 val fragment : Fragment? = ProfilDetail()
                 fragmentManager.beginTransaction().replace(R.id.flLista, fragment).commit()
             }
@@ -102,7 +98,6 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         for (guest in guests) {
             if (guest.username.isNullOrEmpty()) {
                 Log.d("isi username", "gagal")
-                Toast.makeText(this, "Gagal", Toast.LENGTH_SHORT).show()
             } else {
                 usernameTextView!!.text = guest.username
                 emailTextView!!.text = guest.username+"@gmail.com"
